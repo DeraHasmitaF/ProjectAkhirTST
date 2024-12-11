@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/wselder/server.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="VoteAsses" targetNamespace="http://localhost/wselder/server.php">
+  <types>
+    <xsd:schema targetNamespace="http://localhost/wselder/server.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </xsd:schema>
+  </types>
+  <portType name="VoteAssesPort">
+    <operation name="getVote">
+      <input message="tns:getVoteIn"/>
+      <output message="tns:getVoteOut"/>
+    </operation>
+    <operation name="getHistories">
+      <input message="tns:getHistoriesIn"/>
+      <output message="tns:getHistoriesOut"/>
+    </operation>
+  </portType>
+  <binding name="VoteAssesBinding" type="tns:VoteAssesPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getVote">
+      <soap:operation soapAction="http://localhost/wselder/server.php#getVote"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/wselder/server.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/wselder/server.php"/>
+      </output>
+    </operation>
+    <operation name="getHistories">
+      <soap:operation soapAction="http://localhost/wselder/server.php#getHistories"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/wselder/server.php"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/wselder/server.php"/>
+      </output>
+    </operation>
+  </binding>
+  <message name="getVoteIn">
+    <part name="nisn" type="xsd:string"/>
+  </message>
+  <message name="getVoteOut">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <message name="getHistoriesIn"/>
+  <message name="getHistoriesOut">
+    <part name="return" type="soap-enc:Array"/>
+  </message>
+  <service name="VoteAssesService">
+    <port name="VoteAssesPort" binding="tns:VoteAssesBinding">
+      <soap:address location="http://localhost/wselder/server.php"/>
+    </port>
+  </service>
+</definitions>
